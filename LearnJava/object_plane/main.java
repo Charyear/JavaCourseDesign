@@ -41,6 +41,8 @@ public class main {
             int a = in.nextInt();
 
             if(a == 1){
+//                List<Plane> list_info = new LinkedList<>();
+//                plane_info.info_plane(list_info);
                 Admin admin = new Admin();
 
                 if(admin.check()==0){
@@ -87,11 +89,56 @@ public class main {
                 planeSystem.show();
 
             }else if(a==3){
+//                List<User> list_user_info = new LinkedList<>();
+//                User_info.info_user(list_user_info);
+
                 planeSystem.show();
                 List l = (LinkedList)planeSystem.create_user();
                 User_info.info_user(l);
                 System.out.printf("订票成功！！\n");
                 continue;
+
+            }else if(a==4) {
+                System.out.printf("请输入你订单号");
+                String ordernumbers = in.next();
+                List l = planeSystem.change_user_info(ordernumbers);
+                User_info.info_user(l);
+                System.out.printf("退票成功！！\n");
+
+            } else if(a==5){
+//                System.out.printf("请输入你要修改的航班所以信息");
+                //创建基本信息
+                System.out.printf("请输入你要修改的航班号\n");
+                String number = in.next();
+                System.out.printf("请输入你要修改的起点\n");
+                String start_place = in.next();
+                System.out.printf("请输入你要修改的终点\n");
+                String end_place = in.next();
+                System.out.printf("请输入你要修改的起飞时间\n");
+                String start_time = in.next();
+                System.out.printf("请输入你要修改的降落时间\n");
+                String end_time = in.next();
+                System.out.printf("请输入是否满仓\n");
+                String flag = in.next();
+                System.out.printf("请输入你要修改的价格\n");
+                double price = in.nextDouble();
+                System.out.printf("请输入你要修改的折扣数\n");
+                double discount = in.nextDouble();
+
+                List l = (LinkedList)planeSystem.change_plane_info(number, start_place, end_place, start_time, end_time, price, discount, flag);
+                plane_info.info_plane(l);
+
+            }else if(a==6) {
+                Admin admin = new Admin();
+
+                if(admin.check()==0){
+                    planeSystem.show_user();
+                }else{
+                    System.out.printf("管理员账号密码错误,请重试");
+                }
+
+            }else{
+                return ;
             }
         }
     }
